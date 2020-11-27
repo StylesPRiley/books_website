@@ -10,12 +10,12 @@ let indexRouter = require('./routes/index');
 let app = express();
 
 app.get('/without-cors', (req, res, next) => {
-  res.json({msg: 'Works! 🎉'})
-})
+  res.json({msg: 'Works! 🎉'});
+});
 
 app.get('/with-cors', cors(), (req, res, next) => {
-  res.json({msg: 'Works! 🎉'})
-})
+  res.json({msg: 'Works! 🎉'});
+});
 
 
 // view engine setup
