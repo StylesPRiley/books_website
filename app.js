@@ -1,5 +1,6 @@
 let createError = require('http-errors');
 let express = require('express');
+let cors = require('cors');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
@@ -7,6 +8,15 @@ let logger = require('morgan');
 let indexRouter = require('./routes/index');
 
 let app = express();
+
+app.get('/without-cors', (req, res, next) => {
+  res.json({msg: 'Works! 🎉'})
+})
+
+app.get('/with-cors', cors(), (req, res, next) => {
+  res.json({msg: 'Works! 🎉'})
+})
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
