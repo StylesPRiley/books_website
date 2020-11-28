@@ -9,6 +9,8 @@ let indexRouter = require('./routes/index');
 
 let app = express();
 
+app.use(cors());
+
 app.get('/without-cors', (req, res, next) => {
   res.json({msg: 'Works! 🎉'});
 });
