@@ -13,47 +13,39 @@
 <div class="container">
     <h1>Remove Book</h1>
     <div class="container">
-        <form method="GET"
-              action="https://powerful-garden-05743.herokuapp.com/api/books/">
             <h2>Please Provide the Book Information</h2>
-            <div class="form-group">
+
                 <label for="isbn">ISBN: </label>
                 <input type="text" name="isbn" id="isbn" class="form-control"
                        placeholder="ISBN">
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Submit">
-            </div>
-        </form>
+        <button class="btn-primary btn-lg" id="btnRemoveBooks">Remove Books</button>
 
-    </div>
-    <div class="container">
-        <button class="btn btn-lg btn-outline-primary" id="btnRemoveBook">Remove Book</button>
+
     </div>
     <div class="jumbotron" id="output">
 
     </div>
 </div>
 <script>
+    var isbn = document.getElementById("isbn").value;
+
     document.getElementById("btnRemoveBook").addEventListener("click", (event) =>{
-        let url = "https://powerful-garden-05743.herokuapp.com/api/books/"
+        let url = ("https://powerful-garden-05743.herokuapp.com/api/books/" + isbn, true);
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function (){
             if (this.readyState == 4 && this.status == 200){
                 document.getElementById("output").innerHTML =
                     "<pre>" + this.responseText + "</pre>";
+                window.confirm("Book Successfully Added");
             }
+            xhttp.open('DELETE', url, true);
+            // Just needed to place this line AFTER opening the object
+            xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhttp.send(bookData);
         };
-        // foo=bar&lorem=ipsum
-        let bookData = "title=" + document.getElementById("title").value + "&" +
-            "author=" + document.getElementById("author").value  + "&" +
-            "isbn="  + document.getElementById("isbn").value  + "&" +
-            "price="  + document.getElementById("price").value;
-        xhttp.open('DELETE', url, true);
-        // Just needed to place this line AFTER opening the object
-        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhttp.send(bookData);
+
     });
+
 </script>
 </body>
 </html>

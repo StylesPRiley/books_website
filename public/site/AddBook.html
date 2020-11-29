@@ -11,58 +11,62 @@
 
 </head>
 <body>
+<a href="ShowBooks.html" class="btn-lg">Display Books</a>
+<a href="FindBook.html" class="btn-lg">Find Book</a>
+<a href="UpdateBook.html" class="btn-lg">Update Book</a>
+<a href="RemoveBook.html" class="btn-lg">Remove Book</a>
+<a href="UpdateBook.html" class="btn-lg">Update Book</a>
 <div class="container">
-    <h1>Add Book</h1>
-    <div class="container">
-        <form method="POST"
-              action="https://powerful-garden-05743.herokuapp.com/api/books/">
-            <h2>Please Provide the Book Information</h2>
-            <div class="form-group">
-                <label for="title">Title: </label>
-                <input type="text" name="title" id="title" class="form-control"
-                       placeholder="Title">
-            </div>
-            <div class="form-group">
-                <label for="author">Author: </label>
-                <input type="text" name="author" id="author" class="form-control"
-                       placeholder="Author">
-            </div>
 
-            <div class="form-group">
-                <label for="isbn">ISBN: </label>
-                <input type="text" name="isbn" id="isbn" class="form-control"
-                       placeholder="ISBN">
-                <p id="demo"></p>
-            </div>
-            <div class="form-group">
-                <label for="price">Price: </label>
-                <input type="text" name="price" id="price" class="form-control"
-                       placeholder="Price">
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Submit">
-            </div>
-        </form>
+        <h1>Add Friend</h1>
+        <div class="container">
+            <form method="POST"
+                  action="https://arias-friends-api.herokuapp.com/api/books/">
+                <h2>Please provide your friend information</h2>
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" name="title" id="title" class="form-control"
+                           placeholder="title">
+                </div>
+                <div class="form-group">
+                    <label for="author">Author:</label>
+                    <input type="text" name="author" id="author" class="form-control"
+                           placeholder="author">
+                </div>
+                <div class="form-group">
+                    <label for="isbn">ISBN:</label>
+                    <input type="text" name="isbn" id="isbn" class="form-control"
+                           placeholder="isbn">
+                </div>
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input type="text" name="price" id="price" class="form-control"
+                           placeholder="Price">
+                </div>
 
-    </div>
-    <div class="container">
-        <button class="btn btn-lg btn-outline-primary" id="btnAddBook">Add Book</button>
-    </div>
-    <div class="jumbotron" id="output">
+                <div class="form-group">
+                    <input type="submit" value="Submit">
+                </div>
+            </form>
 
+        </div>
+
+        <div class="jumbotron" id="output">
+
+        </div>
     </div>
-</div>
 <script>
 
     const ISBN = require( 'isbn-validate' );
     
-    document.getElementById("btnAddBook").addEventListener("click", (event) =>{
-        let url = "https://powerful-garden-05743.herokuapp.com/"
+    document.getElementById("submitBook").addEventListener("click", (event) =>{
+        let url = "https://powerful-garden-05743.herokuapp.com/api/books/"
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function (){
             if (this.readyState == 4 && this.status == 200){
                 document.getElementById("output").innerHTML =
                     "<pre>" + this.responseText + "</pre>";
+                window.confirm("Book Successfully Added");
 
             }
         };
@@ -81,5 +85,5 @@
         xhttp.send(bookData);
     });
 </script>
-</body>
+</body>>
 </html>

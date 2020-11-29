@@ -8,57 +8,81 @@
     <link rel="stylesheet" href="/stylesheets/bootstrap.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
 </head>
 <body>
+<a href="ShowBooks.html" class="btn-lg">Display Books</a>
+<a href="FindBook.html" class="btn-lg">Find Book</a>
+<a href="UpdateBook.html" class="btn-lg">Update Book</a>
+<a href="RemoveBook.html" class="btn-lg">Remove Book</a>
+<a href="UpdateBook.html" class="btn-lg">Update Book</a>
 <div class="container">
-    <h1>Find Book</h1>
+
+    <h1>Find Book by Author or ISBN</h1>
     <div class="container">
         <form method="GET"
               action="https://powerful-garden-05743.herokuapp.com/api/books/">
-            <h2>Please Provide the Book Information</h2>
             <div class="form-group">
-                <label for="isbn">ISBN: </label>
-                <input type="text" name="isbn" id="isbn" class="form-control"
-                       placeholder="ISBN">
-            </div>
-            <div class="form-group">
-                <label for="author">Author: </label>
+                <label for="author">Author:</label>
                 <input type="text" name="author" id="author" class="form-control"
-                       placeholder="Author">
+                       placeholder="author">
             </div>
             <div class="form-group">
-                <input type="submit" value="Submit">
+                <input type="submit" id = "submitButton1" value="">
             </div>
         </form>
 
     </div>
+
     <div class="container">
-        <button class="btn btn-lg btn-outline-primary" id="btnAddBook">Add Book</button>
+        <form>
+                <label for="isbn">ISBN:</label>
+                <input type="text" name="isbn" id="isbn" class="form-control"
+                       placeholder="isbn">
     </div>
+    <div class="form-group">
+        <input type="submit" id = "submitButton2" value="">
+    </div>
+</form>
+
     <div class="jumbotron" id="output">
 
     </div>
 </div>
 <script>
-    document.getElementById("btnAddBook").addEventListener("click", (event) =>{
-        let url = "https://powerful-garden-05743.herokuapp.com/api/books/"
+
+    var author = document.getElementById("author").value;
+
+    document.getElementById("submitButton1").addEventListener("click", (event) =>{
+        let url = ("https://powerful-garden-05743.herokuapp.com/api/books/?author =" + author, true);
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function (){
             if (this.readyState == 4 && this.status == 200){
                 document.getElementById("output").innerHTML =
                     "<pre>" + this.responseText + "</pre>";
+                window.confirm("Book Successfully Added");
+
             }
         };
-        // foo=bar&lorem=ipsum
-        let bookData = "title=" + document.getElementById("title").value + "&" +
-            "author=" + document.getElementById("author").value  + "&" +
-            "isbn="  + document.getElementById("isbn").value  + "&" +
-            "price="  + document.getElementById("price").value;
-        xhttp.open('POST', url, true);
-        // Just needed to place this line AFTER opening the object
-        xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhttp.send(bookData);
+
+    });
+    var isbn = document.getElementById("isbn").value;
+
+    document.getElementById("submitButton2").addEventListener("click", (event) =>{
+        let url = ("https://powerful-garden-05743.herokuapp.com/api/books/" + isbn, true);
+        let xhttp2 = new XMLHttpRequest;
+        xhttp.onreadystatechange = function (){
+            if (this.readyState == 4 && this.status == 200){
+                document.getElementById("output").innerHTML =
+                    "<pre>" + this.responseText + "</pre>";
+                window.confirm("Book Successfully Added");
+
+
+
+            }
+        };
+
     });
 </script>
-</body>
+</body>>
 </html>
